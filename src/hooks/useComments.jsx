@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { addComment, getCommentsByPublication } from '../services/api';
 
-export const useComments = (postId) => {
+export const useComments = (publicationId) => {
     const [ comments, setComments ] = useState([]);
     const [ loading, setLoading ] = useState(true);
 
     const commentsFetch = async () => {
         setLoading(true);
-        const response = await getCommentsByPublication(postId);
+        const response = await getCommentsByPublication(publicationId);
         if(!response.error) setComments(response.data.comments || []);
         setLoading(false)
 
@@ -20,7 +20,7 @@ export const useComments = (postId) => {
             return false
         }
 
-        const response = await addComment({ name, content, postId });
+        const response = await addComment({ name, content, publicationId });
         if(!response.error) {
             toast.success('Comentario agregado');
             setComments([]);

@@ -8,7 +8,7 @@ const blogApi = axios.create ({
 
 export const getPublications = async () => {
     try {
-        return await blogApi.get('/publications/all')
+        return await blogApi.get('/publications/')
     }catch (error) {
         return {
             error: true,
